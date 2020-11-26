@@ -24,6 +24,7 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     public void PlayBGM(string bgmName)

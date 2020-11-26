@@ -126,6 +126,14 @@ public class MonsterController : MonoBehaviour      //몬스터 동작 컨트롤
 
     }
 
+    protected void detectPlayer()
+    {
+        if (Vector3.Distance(transform.position, player.transform.position) < 3f && monsterAction != monsterActionType.Attack)
+            Attack();
+        else if (Vector3.Distance(transform.position, player.transform.position) >= 3f && monsterAction == monsterActionType.Attack)
+            CancelAttack();
+    }
+
     public void Attack()    //공격 상태일때는 기존 실행중이던 코루틴을 종료하고 현재상태를 공격으로 바꿈
     {
         CancelInvoke();
@@ -150,6 +158,7 @@ public class MonsterController : MonoBehaviour      //몬스터 동작 컨트롤
 
     public void GetAttacked(int damage)     //애니메이션 이벤트 호출에서 참조
     {
+        anim.SetTrigger("getHit");
         mosnterHp -= damage;
         Debug.Log(mosnterHp);
     }

@@ -7,7 +7,7 @@ public class monsterGoblin : MonsterController
     // Start is called before the first frame update
     void Start()
     {
-        init("Goblin",100,1,1,1,1);
+        init("Goblin",100,1,1,0.3f,1f);
         InvokeRepeating("movementChange", 2f, 2.3f);    //행동상태 일정 주기마다 반복
     }
 
@@ -16,6 +16,7 @@ public class monsterGoblin : MonsterController
     {
         ActionSet();    //행동상태에 따라 일정한 행동 반복
         Dead();
+        detectPlayer();
     }
 
 

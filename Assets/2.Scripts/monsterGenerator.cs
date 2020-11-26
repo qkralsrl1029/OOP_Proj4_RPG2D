@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class monsterGenerator : MonoBehaviour
 {
-    [SerializeField] GameObject monster;
+    public MonsterController[] monsterPrefab = new MonsterController[4];
+    List<MonsterController> monsters = new List<MonsterController>();
+
     // Start is called before the first frame update
     void Start()
     {
-        Instantiate(monster, Vector3.zero, Quaternion.identity);
+        
     }
 
     // Update is called once per frame

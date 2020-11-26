@@ -46,11 +46,7 @@ public class characterController : MonoBehaviour
         
     }
 
-    private void LateUpdate()
-    {
-        
-    }
-
+    
     void move()
     {
         Vector3 _move = Vector3.zero;
@@ -114,6 +110,7 @@ public class characterController : MonoBehaviour
 
     public void getDamage(int damage)       //피격 함수
     {
+        anim.SetTrigger("GetHit");
         Hp -= damage;
         hpBar.fillAmount =(float) Hp / maxHp;       //fillamount는 0부터 1까지의 값만 가지므로 실수형으로 형 변환
     }
