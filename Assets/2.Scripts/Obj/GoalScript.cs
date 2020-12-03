@@ -14,6 +14,8 @@ public class GoalScript : MonoBehaviour
             AudioManager.instance.PlaySFX("StageClear");    //스테이지 클리어
             this.GetComponent<SpriteRenderer>().color = Color.white;
             this.GetComponent<SpriteRenderer>().sprite = TreasureBox_Open;
+
+            GameManager.instance.ChangeScene();
         }
     }
 }

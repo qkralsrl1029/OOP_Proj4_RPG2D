@@ -6,15 +6,19 @@ using UnityEngine.UI;
 
 public class characterController : MonoBehaviour
 {
-    [SerializeField] Animator anim;
+    Animator anim;
     [SerializeField] SpriteRenderer characterImage;
+    [SerializeField] Sprite[] jumpImgs;
 
     [SerializeField] float moveSpeed;
     [SerializeField] float jumpPower;
+    [SerializeField] float attackRange;
+    [SerializeField] int Damage;
     [SerializeField] int maxHp;
     [SerializeField] int maxMp;
     int Hp;
     int Mp;
+    LayerMask layer = 1 << 9;
 
 
     [SerializeField] float attackCoolTime;
@@ -27,12 +31,15 @@ public class characterController : MonoBehaviour
     bool isjump = false;
     bool isGrounded = true;
     bool isAttack = false;
+    bool isCombo = false;
    
 
     // Start is called before the first frame update
     void Start()
     {
         rigid = gameObject.GetComponent<Rigidbody2D>();
+        characterImage = GetComponentInChildren<SpriteRenderer>();
+        anim = GetComponent<Animator>();
         Hp = maxHp;
         Mp = maxMp;
     }
@@ -42,7 +49,8 @@ public class characterController : MonoBehaviour
     {
         tryJump();
         attack();
-        move();
+        if(!isAttack)
+            move();
         
     }
 
@@ -72,6 +80,15 @@ public class characterController : MonoBehaviour
 
     void tryJump()
     {
+        if(!isGrounded)
+        {
+            if( rigid.velocity.y > 0)
+                characterImage.sprite = jumpImgs[0];
+            else
+                characterImage.sprite = jumpImgs[1];
+        }
+        
+
         if (isGrounded)
         {
             if (Input.GetKeyDown(KeyCode.Space))
@@ -96,16 +113,40 @@ public class characterController : MonoBehaviour
 
     void attack()   //공격중이 아닐때만 공격 가능
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl) && !isAttack)
-            StartCoroutine(DoAttack());
+        //if(Input.GetKeyDown(KeyCode.LeftControl)&&isCombo)
+        //    StartCoroutine(DoAttack("2"));
+        int randomAttack = UnityEngine.Random.Range(1, 3);
+        if (Input.GetKeyDown(KeyCode.LeftControl) && !isAttack&&!isjump)
+            StartCoroutine(DoAttack(randomAttack.ToString()));
     }
 
-    IEnumerator DoAttack()
+    IEnumerator DoAttack(string comboIndex)
     {
         isAttack = true;
-        anim.SetTrigger("Attack");                          //애니메이션 실행 도중 공격 함수 호출 
+        anim.SetTrigger("Attack"+comboIndex);                          //애니메이션 실행 도중 공격 함수 호출 
         yield return new WaitForSeconds(attackCoolTime);    //공격 딜레이만큼 기다림
         isAttack = false;
+    }
+
+    public void GiveDamage()  //애니메이션 이벤트 호출
+    {
+        RaycastHit2D ray = Physics2D.Raycast(transform.position, transform.right, attackRange, layer);
+
+        if (ray)
+        {
+            ray.transform.GetComponent<MonsterController>().GetAttacked(Damage);
+        }
+
+    }
+
+    void tryCombo()
+    {
+        isCombo = true;
+    }
+
+    public void resetCombo()
+    {
+        isCombo = false;
     }
 
     public void getDamage(int damage)       //피격 함수

@@ -14,18 +14,11 @@ public class UIScript : MonoBehaviour
     float currentTime = 0;  //현재 시간
     float fadeoutTime = 2;  //페이드아웃이 진행될 시간
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        DontDestroyOnLoad(gameObject);
     }
-
     public void gotoPlay()
     {
         Title.SetActive(false);
