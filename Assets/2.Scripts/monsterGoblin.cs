@@ -20,7 +20,6 @@ public class monsterGoblin : MonsterController
         if (isDead)
             return;
         ActionSet();    //행동상태에 따라 일정한 행동 반복
-        Dead();
         detectPlayer();     
     }
 

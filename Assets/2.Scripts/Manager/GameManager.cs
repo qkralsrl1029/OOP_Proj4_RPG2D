@@ -38,6 +38,8 @@ public class GameManager : MonoBehaviour
     {
         StageNum++;
         SceneManager.LoadScene("Stage" + StageNum.ToString(), LoadSceneMode.Single);
+        AudioManager.instance.StopBGM();
+        AudioManager.instance.PlayBGM("Stage" + StageNum.ToString() + "Bgm");
         
         FindObjectOfType<monsterGenerator>().createMonster();
     }

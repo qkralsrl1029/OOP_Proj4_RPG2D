@@ -22,6 +22,7 @@ public class UIScript : MonoBehaviour
     public void gotoPlay()
     {
         Title.SetActive(false);
+        AudioManager.instance.PlayBGM("Stage1Bgm");
         StartCoroutine(fadeOut());
     }
 

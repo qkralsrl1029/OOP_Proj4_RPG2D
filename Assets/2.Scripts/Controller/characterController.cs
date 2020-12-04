@@ -14,6 +14,9 @@ public class characterController : MonoBehaviour
     [SerializeField] float jumpPower;
     [SerializeField] float attackRange;
     [SerializeField] int Damage;
+    [SerializeField] int SkillDamage;
+    [SerializeField] GameObject skillEffect;
+    int FinalDmg;
     [SerializeField] int maxHp;
     [SerializeField] int maxMp;
     int Hp;
@@ -22,6 +25,7 @@ public class characterController : MonoBehaviour
 
 
     [SerializeField] float attackCoolTime;
+    [SerializeField] float skillCoolTime;
 
     [SerializeField] Image hpBar;
     [SerializeField] Image mpBar;
@@ -42,6 +46,7 @@ public class characterController : MonoBehaviour
         anim = GetComponent<Animator>();
         Hp = maxHp;
         Mp = maxMp;
+
     }
 
     // Update is called once per frame
@@ -116,10 +121,17 @@ public class characterController : MonoBehaviour
         //if(Input.GetKeyDown(KeyCode.LeftControl)&&isCombo)
         //    StartCoroutine(DoAttack("2"));
         int randomAttack = UnityEngine.Random.Range(1, 3);
-        if (Input.GetKeyDown(KeyCode.LeftControl) && !isAttack&&!isjump)
+        if (Input.GetKeyDown(KeyCode.LeftControl) && !isAttack && !isjump)
+        {
+            FinalDmg = Damage;
             StartCoroutine(DoAttack(randomAttack.ToString()));
+        }
+        if (Input.GetKeyDown(KeyCode.Q) && !isAttack && !isjump)
+        {
+            StartCoroutine(DoSkill());
+            FinalDmg = SkillDamage;
+        }
     }
-
     IEnumerator DoAttack(string comboIndex)
     {
         isAttack = true;
@@ -128,13 +140,28 @@ public class characterController : MonoBehaviour
         isAttack = false;
     }
 
+    IEnumerator DoSkill()
+    {
+        isAttack = true;
+        anim.SetTrigger("Skill");
+        yield return new WaitForSeconds(skillCoolTime);
+        isAttack = false;
+    }
+
+    void SkillEffect()
+    {
+        GameObject go = Instantiate(skillEffect,transform.position+transform.right*2f,Quaternion.identity);
+        AudioManager.instance.PlaySFX("Skill");
+        Destroy(go, 0.5f);
+    }
+
     public void GiveDamage()  //애니메이션 이벤트 호출
     {
         RaycastHit2D ray = Physics2D.Raycast(transform.position, transform.right, attackRange, layer);
 
         if (ray)
         {
-            ray.transform.GetComponent<MonsterController>().GetAttacked(Damage);
+            ray.transform.GetComponent<MonsterController>().GetAttacked(FinalDmg);
         }
 
     }
@@ -151,9 +178,12 @@ public class characterController : MonoBehaviour
 
     public void getDamage(int damage)       //피격 함수
     {
-        anim.SetTrigger("GetHit");
-        Hp -= damage;
-        hpBar.fillAmount =(float) Hp / maxHp;       //fillamount는 0부터 1까지의 값만 가지므로 실수형으로 형 변환
+        if (!isAttack)
+        {
+            anim.SetTrigger("GetHit");
+            Hp -= damage;
+            hpBar.fillAmount = (float)Hp / maxHp;       //fillamount는 0부터 1까지의 값만 가지므로 실수형으로 형 변환
+        }
     }
     
 

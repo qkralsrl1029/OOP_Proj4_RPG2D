@@ -162,9 +162,22 @@ public class MonsterController : MonoBehaviour      //몬스터 동작 컨트롤
 
     public void GetAttacked(int damage)     //애니메이션 이벤트 호출에서 참조
     {
-        anim.SetTrigger("getHit");
         mosnterHp -= damage;
         hpBar.fillAmount = (float)mosnterHp / maxHp;
+
+        if (mosnterHp <= 0 && !isDead)
+        {
+            StopAllCoroutines();
+            CancelInvoke();
+            isDead = true;
+            monsterAction = monsterActionType.Die;
+            anim.SetBool("isDead", true);
+            anim.SetTrigger("Die");
+
+            Destroy(gameObject, 2f);
+        }
+        else
+            anim.SetTrigger("getHit");
         Debug.Log(mosnterHp);
     }
     
@@ -176,18 +189,5 @@ public class MonsterController : MonoBehaviour      //몬스터 동작 컨트롤
         InvokeRepeating("movementChange", 2f, 2.3f);
     }
 
-    protected void Dead()
-    {
-        if(mosnterHp<=0 && !isDead)
-        {
-            StopAllCoroutines();
-            CancelInvoke();
-            isDead = true;
-            monsterAction = monsterActionType.Die;
-            anim.SetBool("isDead",true);
-            anim.SetTrigger("Die");
-
-            Destroy(gameObject, 2f);
-        }
-    }
+   
 }
