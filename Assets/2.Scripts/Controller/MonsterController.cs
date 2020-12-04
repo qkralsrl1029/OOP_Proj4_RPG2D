@@ -184,7 +184,8 @@ public class MonsterController : MonoBehaviour      //몬스터 동작 컨트롤
             CancelInvoke();
             isDead = true;
             monsterAction = monsterActionType.Die;
-            anim.SetTrigger("isDead");
+            anim.SetBool("isDead",true);
+            anim.SetTrigger("Die");
 
             Destroy(gameObject, 2f);
         }
