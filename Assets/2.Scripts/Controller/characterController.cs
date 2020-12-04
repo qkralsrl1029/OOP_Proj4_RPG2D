@@ -157,9 +157,11 @@ public class characterController : MonoBehaviour
     }
     
 
+    //몬스터 머리위에서도 점프가능하게
+
     private void OnCollisionEnter2D(Collision2D collision)  //땅에 닿았을때 다시 점프 가능
     {
-        if (collision.transform.tag == "Ground")
+        if (collision.transform.tag == "Ground" || collision.transform.tag == "Monster")
         {
             isGrounded = true;
             isjump = false;
