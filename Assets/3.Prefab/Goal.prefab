@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6964951333354209457}
   - component: {fileID: 6964951333354209456}
   - component: {fileID: 6964951333354209459}
+  - component: {fileID: 4828333603564199753}
   m_Layer: 0
   m_Name: Goal
   m_TagString: Finish
@@ -72,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: -648911065
   m_SortingLayer: 3
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 31b72d9b8e9e9e7408ebcadcf74847c8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 808e8d97b7518f945bd1e01c6d1f93dd, type: 3}
   m_Color: {r: 0.7075472, g: 0.7075472, b: 0.7075472, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -100,7 +101,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.26, y: 2.81}
+    oldSize: {x: 3.5, y: 4.87}
     newSize: {x: 3.26, y: 2.81}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -122,3 +123,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TreasureBox_Open: {fileID: 21300000, guid: 84a0c6603fcce444faf84af0b8be0382, type: 3}
+--- !u!95 &4828333603564199753
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6964951333354209458}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 46519cea3a661e24eb822cb7fe3e0a2f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
