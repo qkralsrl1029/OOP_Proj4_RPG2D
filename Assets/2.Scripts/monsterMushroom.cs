@@ -7,7 +7,7 @@ public class monsterMushroom : MonsterController
     // Start is called before the first frame update
     void Start()
     {
-        init("Mushroom", 100, 1, 1, 0.3f, 3f);
+        init("Mushroom", 10, 1, 1, 0.3f, 3f);
         InvokeRepeating("movementChange", 2f, 2.3f);    //행동상태 일정 주기마다 반복
     }
 

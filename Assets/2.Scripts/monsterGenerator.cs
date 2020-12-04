@@ -16,8 +16,7 @@ public class monsterGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
-        DontDestroyOnLoad(gameObject);
+         
         //count[0,0] =2 goblin
         for (int i = 0; i < count[0]; i++)
         {

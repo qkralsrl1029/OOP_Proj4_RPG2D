@@ -11,7 +11,7 @@ public class GoalScript : MonoBehaviour
     {
         if (collision.name == "Player") //플레이어가 골 컬라이더 진입
         {
-            AudioManager.instance.PlaySFX("StageClear");    //스테이지 클리어
+          //  AudioManager.instance.PlaySFX("StageClear");    //스테이지 클리어
             this.GetComponent<SpriteRenderer>().color = Color.white;
             this.GetComponent<SpriteRenderer>().sprite = TreasureBox_Open;
 
