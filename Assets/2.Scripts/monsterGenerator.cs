@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class monsterGenerator : MonoBehaviour
 {
-    public MonsterController[] monsterPrefab = new MonsterController[4];
+    [SerializeField] MonsterController[] monsterPrefab = new MonsterController[4];
     List<MonsterController> monsters = new List<MonsterController>();
-    public GameObject goal;
+    [SerializeField] GameObject goal;
  
     [SerializeField] int[,] count = new int[3, 4] { { 2, 4 ,0, 0} , { 2,4,2,0},{2,4,2,1 } };
     
     [SerializeField] Transform[] monster_pos;
     [SerializeField] Transform goal_pos;
-    int check = 0;
+    bool check = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -83,15 +83,18 @@ public class monsterGenerator : MonoBehaviour
     {
 
         for (int i = 0; i < monsters.Count ; i++)
-        {
-            check = 0;
+        {           
             if (!monsters[i].isDead) {
-                check = 1;
-                break;
+                return;
             }
         }
-        if (check == 0) {   
+        if (!check) 
+        {
+             check = true;
              Instantiate(goal, goal_pos.position, Quaternion.identity);
         }
     }
+
+
+    
 }

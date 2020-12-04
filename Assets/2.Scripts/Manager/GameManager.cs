@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public static int StageNum = 2;
+    public static int StageNum = 1;
     [SerializeField] Image Panel;     //페이드 아웃용 검은 화면
     float currentTime = 0;  //현재 시간
     float fadeoutTime = 2;  //페이드아웃이 진행될 시간
@@ -34,15 +34,11 @@ public class GameManager : MonoBehaviour
       
     }
 
-    public IEnumerator ChangeStage()
+    public void ChangeStage()
     {
-        AsyncOperation asOperation;
+        StageNum++;
+        SceneManager.LoadScene("Stage" + StageNum.ToString(), LoadSceneMode.Single);
         
-        asOperation = SceneManager.LoadSceneAsync("Stage" + StageNum++.ToString(), LoadSceneMode.Single);
-        while (!asOperation.isDone)
-        {
-            yield return null;
-        }
         FindObjectOfType<monsterGenerator>().createMonster();
     }
 
@@ -59,7 +55,7 @@ public class GameManager : MonoBehaviour
             Panel.color = alpha;
             yield return null;
         }
-        StartCoroutine(ChangeStage());
+        ChangeStage();
         StartCoroutine(fadeIn());
     }
 
