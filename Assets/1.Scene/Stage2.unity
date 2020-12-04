@@ -415,7 +415,7 @@ MonoBehaviour:
   jumpImgs:
   - {fileID: 7034338576483803127, guid: 724e79479548b1b4eba4ee49aeeee4aa, type: 3}
   - {fileID: 6596617931644657277, guid: daf241564a8049b4cac17e76b9bbfedb, type: 3}
-  moveSpeed: 3
+  moveSpeed: 5
   jumpPower: 7
   attackRange: 0
   Damage: 0
@@ -479,8 +479,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1758910944}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: -7.74, z: 0}
-  m_LocalScale: {x: 1.707627, y: 1.5896298, z: 1}
+  m_LocalPosition: {x: -8.69, y: -1.65, z: 0}
+  m_LocalScale: {x: 2.8356438, y: 2.478621, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3

@@ -3472,8 +3472,9 @@ MonoBehaviour:
   monsterPrefab:
   - {fileID: 3255620832839811002, guid: 6cf7146b67efa264297a36ad61c6eda7, type: 3}
   - {fileID: 4930901234690809399, guid: 13c55aebce0a4b84eb84127bc344d7f0, type: 3}
+  - {fileID: 126729653193077656, guid: 892b19b3bdc336942821348fa6a28345, type: 3}
+  - {fileID: 4930901234690809399, guid: 13c55aebce0a4b84eb84127bc344d7f0, type: 3}
   goal: {fileID: 6964951333354209458, guid: d286e9241f777c04eaec6f1389f83570, type: 3}
-  count: 0200000004000000
   monster_pos:
   - {fileID: 172059085}
   - {fileID: 448403831}

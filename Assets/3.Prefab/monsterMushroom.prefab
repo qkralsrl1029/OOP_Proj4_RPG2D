@@ -340,11 +340,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 126729653193077651}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e09ccc7f27dd554999869f70316861b, type: 3}
+  m_Script: {fileID: 11500000, guid: 79e350ae58fb47e44a871db7141dc0bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isDead: 0
-  hpBar: {fileID: 0}
+  hpBar: {fileID: 2070551462}
 --- !u!95 &126729653193077652
 Animator:
   serializedVersion: 3
@@ -355,7 +355,7 @@ Animator:
   m_GameObject: {fileID: 126729653193077651}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7c609a0f99828314186b640b5ec066df, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

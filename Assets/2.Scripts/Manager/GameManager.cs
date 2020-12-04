@@ -16,13 +16,14 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
 
+
     private void Start()
     {
         instance = this;
         DontDestroyOnLoad(gameObject);
     }
 
-    static int StageNum = 2;
+    public static int StageNum = 2;
     [SerializeField] Image Panel;     //페이드 아웃용 검은 화면
     float currentTime = 0;  //현재 시간
     float fadeoutTime = 2;  //페이드아웃이 진행될 시간
@@ -30,7 +31,7 @@ public class GameManager : MonoBehaviour
     public void ChangeScene()
     {
         StartCoroutine(fadeOut());
-        
+      
     }
 
     public IEnumerator ChangeStage()
@@ -42,6 +43,7 @@ public class GameManager : MonoBehaviour
         {
             yield return null;
         }
+        FindObjectOfType<monsterGenerator>().createMonster();
     }
 
 

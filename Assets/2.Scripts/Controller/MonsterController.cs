@@ -1,11 +1,13 @@
 ﻿
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MonsterController : MonoBehaviour      //몬스터 동작 컨트롤러
 {
     protected string monsterName;  
     protected int mosnterHp;
+    protected int maxHp;
     protected float moveSpeed;
     protected float moveDir = 1;
     protected float attackSpeed;
@@ -32,16 +34,18 @@ public class MonsterController : MonoBehaviour      //몬스터 동작 컨트롤
     protected bool isAttacking = false;
     protected bool getHit = false;
     LayerMask layerMask;    //플레이어만 감지하는 레이어마스크
+    [SerializeField] Image hpBar;
 
-    
+
     protected void init(string _name,int _hp,float _speed,int _damage,float _range,float _atkspeed)
     {
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         player = FindObjectOfType<characterController>();
         layerMask = 1 << 8;
-
+        hpBar.fillAmount = 1;
         monsterName = _name;
+        maxHp = _hp;
         mosnterHp = _hp;
         moveSpeed = _speed;
         attackDamage = _damage;
@@ -160,6 +164,7 @@ public class MonsterController : MonoBehaviour      //몬스터 동작 컨트롤
     {
         anim.SetTrigger("getHit");
         mosnterHp -= damage;
+        hpBar.fillAmount = (float)mosnterHp / maxHp;
         Debug.Log(mosnterHp);
     }
     

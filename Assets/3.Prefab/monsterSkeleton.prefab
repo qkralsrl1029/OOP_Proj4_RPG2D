@@ -414,4 +414,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDead: 0
-  hpBar: {fileID: 0}
+  hpBar: {fileID: 1231666890}
