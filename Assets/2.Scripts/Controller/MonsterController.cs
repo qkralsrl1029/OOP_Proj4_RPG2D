@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class MonsterController : MonoBehaviour      //몬스터 동작 컨트롤러
 {
-    protected string monsterName;  
+    public string monsterName;  
     protected int mosnterHp;
     protected int maxHp;
     protected float moveSpeed;
@@ -162,6 +162,8 @@ public class MonsterController : MonoBehaviour      //몬스터 동작 컨트롤
 
     public void GetAttacked(int damage)     //애니메이션 이벤트 호출에서 참조
     {
+        if (isDead)
+            return;
         mosnterHp -= damage;
         hpBar.fillAmount = (float)mosnterHp / maxHp;
 
@@ -169,6 +171,9 @@ public class MonsterController : MonoBehaviour      //몬스터 동작 컨트롤
         {
             StopAllCoroutines();
             CancelInvoke();
+            GetComponent<Rigidbody2D>().gravityScale = 0;
+            GetComponent<BoxCollider2D>().enabled = false;
+            
             isDead = true;
             monsterAction = monsterActionType.Die;
             anim.SetBool("isDead", true);

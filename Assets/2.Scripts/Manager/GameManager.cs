@@ -20,10 +20,11 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         instance = this;
+        AudioManager.instance.PlayBGM("Start");
         DontDestroyOnLoad(gameObject);
     }
 
-    public static int StageNum = 1;
+    public static int StageNum = 0;
     [SerializeField] Image Panel;     //페이드 아웃용 검은 화면
     float currentTime = 0;  //현재 시간
     float fadeoutTime = 2;  //페이드아웃이 진행될 시간
@@ -41,7 +42,7 @@ public class GameManager : MonoBehaviour
         AudioManager.instance.StopBGM();
         AudioManager.instance.PlayBGM("Stage" + StageNum.ToString() + "Bgm");
         
-        FindObjectOfType<monsterGenerator>().createMonster();
+        //FindObjectOfType<monsterGenerator>().createMonster();
     }
 
 
@@ -57,10 +58,12 @@ public class GameManager : MonoBehaviour
             Panel.color = alpha;
             yield return null;
         }
-        ChangeStage();
-        StartCoroutine(fadeIn());
+        if (alpha.a > 0.9f)
+        {
+            ChangeStage();
+            StartCoroutine(fadeIn());
+        }
     }
-
     IEnumerator fadeIn()
     {
         Color alpha = Panel.color;

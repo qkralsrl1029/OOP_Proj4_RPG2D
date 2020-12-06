@@ -21,39 +21,10 @@ public class UIScript : MonoBehaviour
     }
     public void gotoPlay()
     {
-        Title.SetActive(false);
-        AudioManager.instance.PlayBGM("Stage1Bgm");
-        StartCoroutine(fadeOut());
+        Title.SetActive(false);       
+        GameManager.instance.ChangeScene();
     }
 
-    IEnumerator fadeOut()
-    {
-        Panel.gameObject.SetActive(true);
-        Color alpha = Panel.color;
-        currentTime = 0;
-        while (alpha.a < 1)
-        {
-            currentTime += Time.deltaTime / fadeoutTime;
-            alpha.a = Mathf.Lerp(0, 1, currentTime);
-            Panel.color = alpha;
-            yield return null;
-        }
-        StartCoroutine(fadeIn());
-    }
-
-    IEnumerator fadeIn()
-    {
-        Color alpha = Panel.color;
-        currentTime = 0;
-        while (alpha.a > 0)
-        {
-            currentTime += Time.deltaTime / fadeoutTime;
-            alpha.a = Mathf.Lerp(1, 0, currentTime);
-            Panel.color = alpha;
-            yield return null;
-        }
-        IngameUI.SetActive(true);
-    }
 
     public void SetExplanation()
     {
