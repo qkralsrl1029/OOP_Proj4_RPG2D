@@ -9,7 +9,7 @@ public class monsterGoblin : MonsterController
     // Start is called before the first frame update
     void Awake()
     {
-        init("Goblin",10,1,1,1f,1f);
+        init("Goblin",20,1,5,1f,2f);
         InvokeRepeating("movementChange", 2f, 2.3f);    //행동상태 일정 주기마다 반복
         Player = FindObjectOfType<characterController>();
     }

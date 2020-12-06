@@ -7,7 +7,7 @@ public class monsterSkeleton : MonsterController
     // Start is called before the first frame update
     void Awake()
     {
-        init("Skeleton", 10, 1, 1, 0.1f, 1);
+        init("Skeleton", 10, 1, 7, 0.5f, 2);
         InvokeRepeating("movementChange", 2f, 2.3f);    //행동상태 일정 주기마다 반복
     }
 
