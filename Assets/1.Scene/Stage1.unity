@@ -2437,7 +2437,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 5
+  m_Constraints: 4
 --- !u!4 &1506123775
 Transform:
   m_ObjectHideFlags: 0
@@ -2480,7 +2480,7 @@ MonoBehaviour:
   attackCoolTime: 0.5
   skillCoolTime: 1
   hpBar: {fileID: 1622545898}
-  mpBar: {fileID: 0}
+  Status: {fileID: 0}
 --- !u!81 &1506123777
 AudioListener:
   m_ObjectHideFlags: 0

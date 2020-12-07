@@ -95,6 +95,13 @@ public class characterController : MonoBehaviour
                 jump();
             }
         }
+        if(Input.GetKeyDown(KeyCode.W))
+        {
+            rigid.velocity = Vector2.zero;
+            Vector2 jumpVelocity = new Vector2(0, jumpPower*2);
+            rigid.AddForce(jumpVelocity, ForceMode2D.Impulse);
+        }
+
     }
 
     void CheckGrounded()    //땅에 닿았는지를 체크하여 애니메이션 실행, 점프/추락
