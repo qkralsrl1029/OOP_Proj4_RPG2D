@@ -17,8 +17,12 @@ public class monsterBoss : MonsterController
     // Update is called once per frame
     void Update()
     {
-        ActionSet();    //행동상태에 따라 일정한 행동 반복
-        detectPlayer();
+        if (!isDead)
+        {
+            ActionSet();    //행동상태에 따라 일정한 행동 반복
+            detectPlayer();
+            
+        }
         EndGame();
     }
 
