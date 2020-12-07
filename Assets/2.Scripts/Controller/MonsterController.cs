@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class MonsterController : MonoBehaviour      //몬스터 동작 컨트롤러
 {
+    #region monster_info
     public string monsterName;  
     protected int mosnterHp;
     protected int maxHp;
@@ -25,18 +26,16 @@ public class MonsterController : MonoBehaviour      //몬스터 동작 컨트롤
         Die,
     }
     protected monsterActionType monsterAction = monsterActionType.Idle;
-
-
+    #endregion
+    #region properties
     protected Rigidbody2D rigid;
     protected Animator anim;
     protected characterController player;
-
     protected bool isAttacking = false;
     protected bool getHit = false;
     LayerMask layerMask;    //플레이어만 감지하는 레이어마스크
     [SerializeField] Image hpBar;
-
-
+    #endregion
     protected void init(string _name,int _hp,float _speed,int _damage,float _range,float _atkspeed)
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -52,7 +51,6 @@ public class MonsterController : MonoBehaviour      //몬스터 동작 컨트롤
         attackRange = _range;
         attackSpeed = _atkspeed;
     }
-
     protected void ActionSet()
     {
         switch (monsterAction)
@@ -78,15 +76,7 @@ public class MonsterController : MonoBehaviour      //몬스터 동작 컨트롤
                         transform.Rotate(0, 180, 0);
                 }
 
-                
-                
-               //플레이어 레이어만 검출해내는 레이캐스트
-                if (Physics2D.Raycast(transform.position,transform.right,attackRange,layerMask))
-                {
-                    //공격 실행중이 아닐때 공격 
-                    if(!isAttacking)
-                        StartCoroutine(DoAttack());
-                }
+                CheckRange();
                 //공격 실행중이 아닐때 플레이어를 향해 이동
                 if (!isAttacking)
                     transform.position = Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
@@ -98,7 +88,6 @@ public class MonsterController : MonoBehaviour      //몬스터 동작 컨트롤
                 
         }
     }
-
     protected void movementChange()
     {
        
@@ -129,21 +118,28 @@ public class MonsterController : MonoBehaviour      //몬스터 동작 컨트롤
         
 
     }
-
     protected void detectPlayer()
     {
-        if (Vector3.Distance(transform.position, player.transform.position) < 3f && monsterAction != monsterActionType.Attack)
+        if (Vector3.Distance(transform.position, player.transform.position) < 5f && monsterAction != monsterActionType.Attack)
             Attack();
-        else if (Vector3.Distance(transform.position, player.transform.position) >= 3f && monsterAction == monsterActionType.Attack)
+        else if (Vector3.Distance(transform.position, player.transform.position) >= 5f && monsterAction == monsterActionType.Attack)
             CancelAttack();
     }
-
     public void Attack()    //공격 상태일때는 기존 실행중이던 코루틴을 종료하고 현재상태를 공격으로 바꿈
     {
         CancelInvoke();
         monsterAction = monsterActionType.Attack;
     }
-
+    virtual protected void CheckRange()
+    {
+        //플레이어 레이어만 검출해내는 레이캐스트
+        if (Physics2D.Raycast(transform.position, transform.right, attackRange, layerMask))
+        {
+            //공격 실행중이 아닐때 공격 
+            if (!isAttacking)
+                StartCoroutine(DoAttack());
+        }
+    }
     public void GiveDamage()    //애니메이션 이벤트로 호출
     {
         if (Physics2D.Raycast(transform.position, transform.right, attackRange, layerMask))
@@ -151,15 +147,13 @@ public class MonsterController : MonoBehaviour      //몬스터 동작 컨트롤
             player.getDamage(attackDamage);
         }
     }
-
-    protected IEnumerator DoAttack()
+    virtual protected IEnumerator DoAttack()
     {
         isAttacking = true;
         anim.SetTrigger("attack");  //공격 애니메이션 실행 후
         yield return new WaitForSeconds(attackSpeed);   //공격속도만큼 대기
         isAttacking = false;
     }
-
     public void GetAttacked(int damage)     //애니메이션 이벤트 호출에서 참조
     {
         if (isDead)
@@ -173,7 +167,8 @@ public class MonsterController : MonoBehaviour      //몬스터 동작 컨트롤
             CancelInvoke();
             GetComponent<Rigidbody2D>().gravityScale = 0;
             GetComponent<BoxCollider2D>().enabled = false;
-            
+
+            AudioManager.instance.PlaySFX(monsterName + "Die");
             isDead = true;
             monsterAction = monsterActionType.Die;
             anim.SetBool("isDead", true);
@@ -185,14 +180,9 @@ public class MonsterController : MonoBehaviour      //몬스터 동작 컨트롤
             anim.SetTrigger("getHit");
         Debug.Log(mosnterHp);
     }
-    
-
-
     public void CancelAttack()
     {
         monsterAction = monsterActionType.Idle; //플레이어가 일정 범위 밖으로 나갔다면 다시 기본상태로 회귀
         InvokeRepeating("movementChange", 2f, 2.3f);
-    }
-
-   
+    } 
 }

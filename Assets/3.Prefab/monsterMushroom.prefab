@@ -343,6 +343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79e350ae58fb47e44a871db7141dc0bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monsterName: 
   isDead: 0
   hpBar: {fileID: 2070551462}
 --- !u!95 &126729653193077652

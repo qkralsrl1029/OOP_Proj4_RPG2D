@@ -28,7 +28,7 @@ public class monsterGenerator : MonoBehaviour
                 return;
             }
         }
-        if (!check) 
+        if (!check&&GameManager.StageNum!=3) 
         {
              check = true;
              Instantiate(goal, goal_pos.position, Quaternion.identity);

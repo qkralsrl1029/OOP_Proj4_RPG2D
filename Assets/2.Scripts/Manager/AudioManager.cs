@@ -43,9 +43,6 @@ public class AudioManager : MonoBehaviour
     {
         bgmPlayer.Stop();
     }
-
-
-
     public void PlaySFX(string sfxName)
     {
         for (int i = 0; i < sfx.Length; i++)
@@ -67,5 +64,4 @@ public class AudioManager : MonoBehaviour
         }
         Debug.Log("해당 곡이 존재하지않습니다");
     }
-
 }

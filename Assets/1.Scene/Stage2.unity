@@ -914,7 +914,7 @@ MonoBehaviour:
   - {fileID: 6596617931644657277, guid: daf241564a8049b4cac17e76b9bbfedb, type: 3}
   moveSpeed: 5
   jumpPower: 6
-  attackRange: 10
+  attackRange: 1.5
   Damage: 10
   SkillDamage: 50
   skillEffect: {fileID: 230517633602473270, guid: 090858a1b133f0a49a151c7ddb8cbb66,
@@ -924,7 +924,7 @@ MonoBehaviour:
   attackCoolTime: 0.5
   skillCoolTime: 1
   hpBar: {fileID: 1328225435}
-  mpBar: {fileID: 0}
+  Status: {fileID: 0}
 --- !u!61 &1758910949
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -980,8 +980,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1758910944}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.17, y: -1.52, z: 0}
-  m_LocalScale: {x: 2, y: 2.3, z: 1}
+  m_LocalPosition: {x: -11.17, y: -1.64, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3

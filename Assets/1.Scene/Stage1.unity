@@ -1438,7 +1438,7 @@ GameObject:
   m_Component:
   - component: {fileID: 64787987}
   - component: {fileID: 64787988}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GroundFrame (4)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -1539,7 +1539,7 @@ GameObject:
   m_Component:
   - component: {fileID: 343834263}
   - component: {fileID: 343834264}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GroundFrame (7)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -1596,7 +1596,7 @@ GameObject:
   m_Component:
   - component: {fileID: 374750564}
   - component: {fileID: 374750565}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GroundFrame (2)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -1654,7 +1654,7 @@ GameObject:
   - component: {fileID: 458001510}
   - component: {fileID: 458001512}
   - component: {fileID: 458001511}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GroundFrame
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -1955,7 +1955,7 @@ GameObject:
   m_Component:
   - component: {fileID: 858400571}
   - component: {fileID: 858400572}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GroundFrame (6)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -2125,22 +2125,22 @@ PrefabInstance:
     - target: {fileID: 6980292222924444000, guid: 13c55aebce0a4b84eb84127bc344d7f0,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6980292222924444000, guid: 13c55aebce0a4b84eb84127bc344d7f0,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6980292222924444000, guid: 13c55aebce0a4b84eb84127bc344d7f0,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6980292222924444000, guid: 13c55aebce0a4b84eb84127bc344d7f0,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6980292222924444000, guid: 13c55aebce0a4b84eb84127bc344d7f0,
         type: 3}
@@ -2155,7 +2155,7 @@ PrefabInstance:
     - target: {fileID: 6980292222924444000, guid: 13c55aebce0a4b84eb84127bc344d7f0,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 6980292222924444000, guid: 13c55aebce0a4b84eb84127bc344d7f0,
         type: 3}
@@ -2260,7 +2260,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1239867731}
   - component: {fileID: 1239867732}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GroundFrame (3)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -2470,7 +2470,7 @@ MonoBehaviour:
   - {fileID: 6596617931644657277, guid: daf241564a8049b4cac17e76b9bbfedb, type: 3}
   moveSpeed: 4
   jumpPower: 5
-  attackRange: 10
+  attackRange: 1.5
   Damage: 10
   SkillDamage: 50
   skillEffect: {fileID: 230517633602473270, guid: 090858a1b133f0a49a151c7ddb8cbb66,
@@ -2569,7 +2569,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1615460814}
   - component: {fileID: 1615460815}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GroundFrame (5)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -2838,7 +2838,7 @@ PrefabInstance:
     - target: {fileID: 6980292222924444000, guid: 13c55aebce0a4b84eb84127bc344d7f0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 21.493385
+      value: 24.15
       objectReference: {fileID: 0}
     - target: {fileID: 6980292222924444000, guid: 13c55aebce0a4b84eb84127bc344d7f0,
         type: 3}
@@ -2945,7 +2945,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1959914752}
   - component: {fileID: 1959914754}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GroundFrame (1)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -3082,7 +3082,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2098081729}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}

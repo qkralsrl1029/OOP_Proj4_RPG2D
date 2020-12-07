@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     }
 
     public static int StageNum = 0;
+    public static bool isEnd = false;
     [SerializeField] Image Panel;     //페이드 아웃용 검은 화면
     float currentTime = 0;  //현재 시간
     float fadeoutTime = 2;  //페이드아웃이 진행될 시간

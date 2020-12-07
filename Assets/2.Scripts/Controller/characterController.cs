@@ -28,14 +28,14 @@ public class characterController : MonoBehaviour
     [SerializeField] float skillCoolTime;
 
     [SerializeField] Image hpBar;
-    [SerializeField] Image mpBar;
+    [SerializeField] GameObject Status;
    
 
     Rigidbody2D rigid;
     bool isjump = false;
     bool isGrounded = true;
     bool isAttack = false;
-    bool isCombo = false;
+    bool isDead = false;
    
 
     // Start is called before the first frame update
@@ -46,12 +46,13 @@ public class characterController : MonoBehaviour
         anim = GetComponent<Animator>();
         Hp = maxHp;
         Mp = maxMp;
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        CheckGrounded();
         tryJump();
         attack();
         if(!isAttack)
@@ -84,16 +85,7 @@ public class characterController : MonoBehaviour
     }
 
     void tryJump()
-    {
-        if(!isGrounded)
-        {
-            if( rigid.velocity.y > 0)
-                characterImage.sprite = jumpImgs[0];
-            else
-                characterImage.sprite = jumpImgs[1];
-        }
-        
-
+    {              
         if (isGrounded)
         {
             if (Input.GetKeyDown(KeyCode.Space))
@@ -105,12 +97,42 @@ public class characterController : MonoBehaviour
         }
     }
 
+    void CheckGrounded()    //땅에 닿았는지를 체크하여 애니메이션 실행, 점프/추락
+    {
+        if (Physics2D.Raycast(transform.position, -transform.up, 1.1f, 1 << 10))    //땅에 닿았을 경우
+        {
+            isGrounded = true;
+            isjump = false;
+            anim.SetBool("Jumping", false);
+            anim.SetBool("Falling", false);
+        }
+        else    //땅에 닿지 않았을때
+        {
+            isGrounded = false;
+            isjump = true;
+            if (rigid.velocity.y > 0)   //속도가 0이상이면(올라가는중이면)
+            {
+                //점프 애니메이션 실행
+                anim.SetBool("Falling", false);
+                anim.SetBool("Jumping", true);
+
+            }
+            else    //속도가 0이하면(떨어지는 중이면)
+            {
+                //떨어지는 애니메이션 실행
+                anim.SetBool("Jumping", false);
+                anim.SetBool("Falling", true);
+            }
+        }
+    }
+
     void jump()
     {
+        //스페이스 키가 눌렸을때 점프중이 아니라면
         if (!isjump)
             return;
 
-        anim.SetTrigger("Jump");
+        //+Y방향으로 addforce
         rigid.velocity = Vector2.zero;
         Vector2 jumpVelocity = new Vector2(0, jumpPower);
         rigid.AddForce(jumpVelocity, ForceMode2D.Impulse);       
@@ -135,6 +157,7 @@ public class characterController : MonoBehaviour
     IEnumerator DoAttack(string comboIndex)
     {
         isAttack = true;
+        AudioManager.instance.PlaySFX("Attack");
         anim.SetTrigger("Attack"+comboIndex);                          //애니메이션 실행 도중 공격 함수 호출 
         yield return new WaitForSeconds(attackCoolTime);    //공격 딜레이만큼 기다림
         isAttack = false;
@@ -166,25 +189,27 @@ public class characterController : MonoBehaviour
 
     }
 
-    void tryCombo()
-    {
-        isCombo = true;
-    }
-
-    public void resetCombo()
-    {
-        isCombo = false;
-    }
 
     public void getDamage(int damage)       //피격 함수
     {
         if (!isAttack)
         {
             anim.SetTrigger("GetHit");
+            //AudioManager.instance.PlaySFX("GetHit");
             Hp -= damage;
             hpBar.fillAmount = (float)Hp / maxHp;       //fillamount는 0부터 1까지의 값만 가지므로 실수형으로 형 변환
+            if(Hp<=0&& !isDead)
+            {
+                isDead = true;
+                anim.SetBool("isDead", true);
+                anim.SetTrigger("Die");
+                GameManager.StageNum--;
+                GameManager.instance.ChangeScene();
+                AudioManager.instance.PlaySFX("Respawn");
+            }
         }
     }
+    
     
 
     //몬스터 머리위에서도 점프가능하게
@@ -196,5 +221,10 @@ public class characterController : MonoBehaviour
             isGrounded = true;
             isjump = false;
         }
+    }
+
+    public void GameSet()
+    {
+        Destroy(Status);
     }
 }
