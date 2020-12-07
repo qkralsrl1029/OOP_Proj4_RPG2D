@@ -79,6 +79,10 @@ public class characterController : MonoBehaviour
             _move = Vector3.right;
             anim.SetBool("Move", true);
         }
+        else if(Input.GetKeyDown(KeyCode.E))
+        {
+            FindObjectOfType<monsterGenerator>().StageClear();
+        }
         else
             anim.SetBool("Move", false);
         transform.Translate(_move * moveSpeed * Time.deltaTime);

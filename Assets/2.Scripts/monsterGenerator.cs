@@ -33,5 +33,14 @@ public class monsterGenerator : MonoBehaviour
              check = true;
              Instantiate(goal, goal_pos.position, Quaternion.identity);
         }
-    } 
+    }
+
+    public void StageClear()
+    {
+        for (int i = 0; i < monsters.Count; i++)
+        {
+            monsters[i].isDead = true;
+            Destroy(monsters[i].gameObject);
+        }
+    }
 }
