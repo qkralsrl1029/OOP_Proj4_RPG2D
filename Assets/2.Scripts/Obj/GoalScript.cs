@@ -10,6 +10,7 @@ public class GoalScript : MonoBehaviour
         {
             AudioManager.instance.PlaySFX("Portal");    //스테이지 클리어           
             GameManager.instance.ChangeScene();
+            GetComponent<BoxCollider2D>().enabled = false;
         }
     }
 }
