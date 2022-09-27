@@ -7,14 +7,13 @@ using UnityEngine.UI;
 public class characterController : MonoBehaviour
 {
     Animator anim;
-    [SerializeField] SpriteRenderer characterImage;
-    [SerializeField] Sprite[] jumpImgs;
 
     [SerializeField] float moveSpeed;
     [SerializeField] float jumpPower;
     [SerializeField] float attackRange;
     [SerializeField] int Damage;
     [SerializeField] int SkillDamage;
+    [Tooltip("스킬 사용시 생성될 프리팹")]
     [SerializeField] GameObject skillEffect;
     int FinalDmg;
     [SerializeField] int maxHp;
@@ -42,7 +41,6 @@ public class characterController : MonoBehaviour
     void Start()
     {
         rigid = gameObject.GetComponent<Rigidbody2D>();
-        characterImage = GetComponentInChildren<SpriteRenderer>();
         anim = GetComponent<Animator>();
         Hp = maxHp;
         Mp = maxMp;
