@@ -44,7 +44,7 @@ public class monsterBoss : MonsterController
 
     void EndGame()
     {
-        if(mosnterHp<=0&& !GameManager.isEnd)
+        if(monsterHp<=0&& !GameManager.isEnd)
         {
             GameManager.isEnd = true;
             Time.timeScale = 0.3f;

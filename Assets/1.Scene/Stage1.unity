@@ -2785,10 +2785,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2249c29abd6adb47b9e2ad365faee1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterImage: {fileID: 0}
-  jumpImgs:
-  - {fileID: 7034338576483803127, guid: 724e79479548b1b4eba4ee49aeeee4aa, type: 3}
-  - {fileID: 6596617931644657277, guid: daf241564a8049b4cac17e76b9bbfedb, type: 3}
   moveSpeed: 4
   jumpPower: 5
   attackRange: 1.5

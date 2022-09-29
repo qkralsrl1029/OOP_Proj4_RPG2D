@@ -7,13 +7,17 @@ public class MonsterController : MonoBehaviour      //몬스터 동작 컨트롤
 {
     #region monster_info
     public string monsterName;  
-    protected int mosnterHp;
+    protected int monsterHp;
     protected int maxHp;
     protected float moveSpeed;
     protected float moveDir = 1;
     protected float attackSpeed;
     protected int attackDamage;
     protected float attackRange;
+    protected int skillType;                //스킬 타입 (공격/방어/CC)
+    protected int skillDamage;
+    protected float skillCoolDown;      //스킬 쿨타임
+    [SerializeField] protected GameObject skillEffect;
 
     public bool isDead = false;
 
@@ -45,7 +49,7 @@ public class MonsterController : MonoBehaviour      //몬스터 동작 컨트롤
         hpBar.fillAmount = 1;
         monsterName = _name;
         maxHp = _hp;
-        mosnterHp = _hp;
+        monsterHp = _hp;
         moveSpeed = _speed;
         attackDamage = _damage;
         attackRange = _range;
@@ -158,10 +162,10 @@ public class MonsterController : MonoBehaviour      //몬스터 동작 컨트롤
     {
         if (isDead)
             return;
-        mosnterHp -= damage;
-        hpBar.fillAmount = (float)mosnterHp / maxHp;
+        monsterHp -= damage;
+        hpBar.fillAmount = (float)monsterHp / maxHp;
 
-        if (mosnterHp <= 0 && !isDead)
+        if (monsterHp <= 0 && !isDead)
         {
             StopAllCoroutines();
             CancelInvoke();
@@ -178,11 +182,19 @@ public class MonsterController : MonoBehaviour      //몬스터 동작 컨트롤
         }
         else
             anim.SetTrigger("getHit");
-        Debug.Log(mosnterHp);
+        Debug.Log(monsterHp);
     }
     public void CancelAttack()
     {
         monsterAction = monsterActionType.Idle; //플레이어가 일정 범위 밖으로 나갔다면 다시 기본상태로 회귀
         InvokeRepeating("movementChange", 2f, 2.3f);
     } 
+
+    public virtual void MonsterSkill()
+    {
+        //스킬 이펙트 및 소리 재생
+        GameObject go = Instantiate(skillEffect, transform.position + transform.right * 2f, Quaternion.identity);
+        AudioManager.instance.PlaySFX("Skill");
+        Destroy(go, 0.5f);
+    }
 }

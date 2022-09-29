@@ -21,7 +21,8 @@ public class UIScript : MonoBehaviour
     }
     public void gotoPlay()
     {
-        Title.SetActive(false);       
+        Title.SetActive(false);
+        Cursor.visible = false;
         GameManager.instance.ChangeScene();
     }
 
