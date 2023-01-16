@@ -12,9 +12,9 @@ public class Sound
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager instance;        //접근성 용이, 자기자신 인스턴스화
+    public static AudioManager instance;        
 
-    [SerializeField] Sound[] sfx = null;
+    [SerializeField] List<Sound> sfx = null;
     [SerializeField] Sound[] bgm = null;
 
     [SerializeField] AudioSource bgmPlayer = null;  //브금은 한개씩만 플레이
@@ -45,23 +45,19 @@ public class AudioManager : MonoBehaviour
     }
     public void PlaySFX(string sfxName)
     {
-        for (int i = 0; i < sfx.Length; i++)
+        int idx = sfx.FindIndex(x => x.name == sfxName);
+        if (idx < 0)
+            return;
+        for (int i = 0; i < sfxPlayer.Length; i++)
         {
-            if (sfxName == sfx[i].name)     //같은 이름이 있는지 검사하고
+            if (!sfxPlayer[i].isPlaying)     //check if available audiosrc left
             {
-                for (int j = 0; j < sfxPlayer.Length; j++)
-                {
-                    if (!sfxPlayer[j].isPlaying)     //남아있는 오디오 소스가 있는 지 검사
-                    {
-                        sfxPlayer[j].clip = sfx[i].clip;
-                        sfxPlayer[j].Play();
-                        return;
-                    }
-                }
-                Debug.Log("남아있는 오디오소스가 없습니다");
+                sfxPlayer[i].clip = sfx[idx].clip;
+                sfxPlayer[i].Play();
                 return;
             }
         }
-        Debug.Log("해당 곡이 존재하지않습니다");
+        Debug.Log("남아있는 오디오소스가 없습니다");
+        return;
     }
 }

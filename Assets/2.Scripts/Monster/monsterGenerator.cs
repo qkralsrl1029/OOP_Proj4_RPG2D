@@ -5,6 +5,7 @@ using UnityEngine;
 public class monsterGenerator : MonoBehaviour
 {
     List<MonsterController> monsters = new List<MonsterController>();
+    List<string> monsterNames = new List<string> { "Goblin", "Mushroom", "Skeleton" };
     [SerializeField] GameObject goal;
     [SerializeField] Transform goal_pos;
     bool check = false;
@@ -15,7 +16,7 @@ public class monsterGenerator : MonoBehaviour
         foreach (MonsterController go in Resources.FindObjectsOfTypeAll(typeof(MonsterController)) as MonsterController[])
         {
             string monName = go.GetComponent<MonsterController>().monsterName;
-            if (monName.Equals("Goblin")|| monName.Equals("Mushroom")|| monName.Equals("Skeleton"))
+            if (monsterNames.FindIndex(x => x.Equals(monName))>=0)
                 monsters.Add(go);            
         }      
     }   

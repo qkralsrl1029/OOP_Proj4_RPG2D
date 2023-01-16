@@ -182,9 +182,12 @@ public class characterController : MonoBehaviour
 
     void SkillEffect()
     {
-        GameObject go = Instantiate(skillEffect,transform.position+transform.right*2f,Quaternion.identity);
-        AudioManager.instance.PlaySFX("Skill");
+        Vector3 skillPos = transform.position + transform.right * 2f;
+        Quaternion skillRot = Quaternion.identity;
+        GameObject go = Instantiate(skillEffect,skillPos,skillRot);
         Destroy(go, 0.5f);
+
+        AudioManager.instance.PlaySFX("Skill");
     }
 
     public void GiveDamage()  //애니메이션 이벤트 호출
